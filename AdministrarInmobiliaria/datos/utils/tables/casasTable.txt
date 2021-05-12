@@ -1,4 +1,4 @@
 
 +-------+----------+-------------+------------+-----------+----------------+--------------+-----------+-----------------+
-|  id   |    m²    | Costo Final | Nº cuartos | Precio m² | Propietario ID | Ubicacion ID | Ciudad ID | Constructora ID |
+|  id   |    m²    | Costo Final | Nº cuartos | Precio m² | Propietario ID |    Nº Casa   |   Ciudad  | Constructora ID |
 +-------+----------+-------------+------------+-----------+----------------+--------------+-----------+-----------------+     
