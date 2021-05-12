@@ -10,5 +10,44 @@ package paquetecuatro;
  * @author reroes
  */
 public class Ciudad {
-    
+
+    private String id;
+    private String nombreCiudad;
+    private String nombreProvincia;
+
+    public Ciudad(String nombreCiudad, String nombreProvincia, String id) {
+        this.id = id;
+        this.nombreCiudad = nombreCiudad;
+        this.nombreProvincia = nombreProvincia;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getNombreProvincia() {
+        return nombreProvincia;
+    }
+
+    public void setNombreProvincia(String nombreProvincia) {
+        this.nombreProvincia = nombreProvincia;
+    }
+
+    public String getNombreCiudad() {
+        return nombreCiudad;
+    }
+
+    public void setNombreCiudad(String nombreCiudad) {
+        this.nombreCiudad = nombreCiudad;
+    }
+
+    @Override
+    public String toString() {
+        return nombreCiudad + "\n" + nombreProvincia + "\n" + id + "\n";
+    }
+
 }

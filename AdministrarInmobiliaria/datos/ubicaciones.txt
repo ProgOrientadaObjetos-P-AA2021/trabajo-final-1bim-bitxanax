@@ -1,0 +1,21 @@
+/
+1
+La pedrada
+Entrada al sector
+1
+/
+2
+Cañaberal
+A lado de la tienda "Juan Topo"
+2
+/
+3
+Flores Rojas
+Cerca de la gasolinera
+3
+/
+4
+Barcos
+Frente a la plaza de toros
+4
+/

@@ -1,0 +1,21 @@
+/
+Loja
+Loja
+1
+/
+Machala
+El oro
+2
+/
+Cuenca
+Azuay
+3
+/
+Riobamba
+Chimborazo
+4
+/
+Latacunga
+Cotopaxi
+5
+/
