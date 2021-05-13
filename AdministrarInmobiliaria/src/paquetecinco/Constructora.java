@@ -7,12 +7,12 @@ package paquetecinco;
 
 /**
  *
- * @author reroes
+ * @author bitxanax
  */
 public class Constructora {
 
-    private String nombre;
     private String id;
+    private String nombre;
 
     public Constructora(String id, String nombre) {
         this.id = id;

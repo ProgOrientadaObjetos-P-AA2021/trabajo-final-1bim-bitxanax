@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author reroes
+ * @author bitxanax
  */
 public class Ejecutor {
 
@@ -21,13 +21,12 @@ public class Ejecutor {
         try {
             showMenu();
         } catch (InterruptedException ex) {
-            Logger.getLogger(Ejecutor.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }
 
     public static void showMenu() throws InterruptedException, IOException {
-        /*Animations animation = new Animations();
-        animation.loadingBar();*/
+        
         DataHandler objectsManager = new DataHandler();
 
         Scanner read = new Scanner(System.in);
@@ -39,7 +38,7 @@ public class Ejecutor {
             System.out.print("\n► Opción: ");
             option = read.nextLine();
             option.replaceAll(" ", "");
-            
+
             switch (option) {
                 case "1":
                     showFileMenu("utils/entity_menu.txt");

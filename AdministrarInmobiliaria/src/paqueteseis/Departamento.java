@@ -5,7 +5,6 @@
  */
 package paqueteseis;
 
-import java.io.Serializable;
 import paquetecinco.Constructora;
 import paquetecuatro.Ciudad;
 import paquetedos.Propietario;
@@ -13,25 +12,31 @@ import paquetetres.Ubicacion;
 
 /**
  *
- * @author reroes
+ * @author bitxanax
  */
-public class Departamento implements Serializable {
+public class Departamento  {
 
     private String id;
-    private Propietario propietario;
+    private String nombreEdificio;
+    private String ubicacionEnEdificio;
+    private int numeroCuartos;
+    
     private double precioMetroCuadrado;
     private double metrosCuadrados;
     private double costoFinal;
     private double precio;
     private double valorCuotaMensual;
-    private String ubicacionEnEdificio;
+
+    private Propietario propietario;
     private Ubicacion ubicacion;
-    private String nombreEdificio;
     private Ciudad ciudad;
-    private int numeroCuartos;
     private Constructora constructora;
 
-    public Departamento(String id, Propietario propietario, double precioMetroCuadrado, double metrosCuadradados, double precio, double valorCuotaMensual, String ubicacionEnEdificio, Ubicacion ubicacion, String nombreEdificio, Ciudad ciudad, int numeroCuartos, Constructora constructora) {
+    public Departamento(String id, Propietario propietario, double precioMetroCuadrado, 
+            double metrosCuadradados, double precio, double valorCuotaMensual, 
+            String ubicacionEnEdificio, Ubicacion ubicacion, String nombreEdificio,
+            Ciudad ciudad, int numeroCuartos, Constructora constructora) {
+        
         this.id = id;
         this.propietario = propietario;
         this.precioMetroCuadrado = precioMetroCuadrado;
@@ -126,8 +131,6 @@ public class Departamento implements Serializable {
         this.constructora = constructora;
     }
 
-    public Departamento() {
-    }
 
     public double getPrecio() {
         return precio;

@@ -12,7 +12,7 @@ import paquetetres.Ubicacion;
 
 /**
  *
- * @author reroes
+ * @author bitxanax
  */
 public class Casa {
 

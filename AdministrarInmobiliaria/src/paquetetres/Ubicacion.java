@@ -1,24 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package paquetetres;
 
-import java.io.Serializable;
 
 /**
  *
- * @author reroes
+ * @author bitxanax
  */
-public class Ubicacion implements Serializable {
+public class Ubicacion {
 
     private String id;
     private String nombreBarrio;
     private String referencia;
     private int numeroCasa;
 
-    public Ubicacion(int numeroCasa,  String nombreBarrio, String referencia, String id) {
+    public Ubicacion(int numeroCasa,  String nombreBarrio, String referencia, 
+            String id) {
         this.id = id;
         this.nombreBarrio = nombreBarrio;
         this.referencia = referencia;

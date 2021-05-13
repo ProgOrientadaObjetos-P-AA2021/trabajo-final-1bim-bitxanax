@@ -8,18 +8,15 @@ package paqueteuno;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.Callable;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author bitxanax
- */
+*/
 public class FilesHandler {
 
     static String workDirectory = System.getProperty("user.dir");
@@ -74,7 +71,7 @@ public class FilesHandler {
     }
 
     public static void showFileData(String fileName, String command,
-            String[] leftAlignFormat, String filter, int filterPosition) throws IOException {
+            String[] alignFormat, String filter, int filterPosition) throws IOException {
 
         FileReader fileReader = null;
         BufferedReader reader = null;
@@ -100,7 +97,7 @@ public class FilesHandler {
                     //System.out.print("line: " + line);
                     if (!line.equals("/")) {
                         //System.out.print(" index: " + index);
-                        System.out.printf(leftAlignFormat[index], line);
+                        System.out.printf(alignFormat[index], line);
                         index++;
                     } else {
                         System.out.println("\n");

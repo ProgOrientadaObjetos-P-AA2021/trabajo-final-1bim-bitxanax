@@ -272,12 +272,13 @@ public class DataHandler {
         return new Constructora(properties[0], properties[1]);
     }
 
-    public void showTable(String fileName, String[] leftAlignFormat, String command) throws IOException {
-        FilesHandler.showFileData(fileName, command, leftAlignFormat, null, 0);
+    public void showTable(String fileName, String[] alignFormat, String command) throws IOException {
+        FilesHandler.showFileData(fileName, command, alignFormat, null, 0);
     }
 
     public void showAllTables() throws IOException {
-
+        Animations animation = new Animations();
+        animation.loadingBar();
         for (int i = 0; i < entities.length; i++) {
             showTable("utils/tables/" + entities[i] + "Table.txt", null, null);
             showTable(entities[i] + ".txt", alignFormats.get(i), "/getEntities");

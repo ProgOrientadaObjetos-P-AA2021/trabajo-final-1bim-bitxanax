@@ -7,7 +7,7 @@ package paquetecuatro;
 
 /**
  *
- * @author reroes
+ * @author bitxanax
  */
 public class Ciudad {
 

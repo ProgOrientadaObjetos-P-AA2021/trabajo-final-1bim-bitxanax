@@ -10,9 +10,9 @@ import java.io.Serializable;
 
 /**
  *
- * @author reroes
+ * @author bitxanax
  */
-public class Propietario implements Serializable {
+public class Propietario {
 
     String id;
     String nombres;
