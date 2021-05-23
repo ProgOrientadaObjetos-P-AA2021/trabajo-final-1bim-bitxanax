@@ -4,7 +4,7 @@ package paqueteuno;
  *
  * @author bitxanax
  */
-public class Animations extends Thread {
+public class Animation extends Thread {
 
     public void loadingBar() {
         System.out.print("Loading ");

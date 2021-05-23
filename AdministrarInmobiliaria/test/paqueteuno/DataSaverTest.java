@@ -6,49 +6,50 @@
 package paqueteuno;
 
 import java.io.IOException;
+;
 import org.testng.annotations.Test;
+import paquetedos.Propietario;
+import paqueteseis.Casa;
+import paqueteseis.Departamento;
+import paquetetres.Ubicacion;
 
 /**
  *
  * @author bitxanax
  */
+
+
 public class DataSaverTest {
 
     @Test
     public void tryx() throws IOException {
-        /*FilesHandler data = new FilesHandler();
-      String[] properties = new String [4];
-      properties = data.getByFilter(properties, "ubicaciones.txt", "1", 0);
-      
-      for(String i:properties) {
-          System.out.println(i);
-      }
+        Deserializer deserializer = new Deserializer();
+
         /*
-      /*    
-          public String[] getByFilter(String[] properties, String fileName, String filter,
-            int filterPosition) throws IOException {
-
-        showFileData(fileName, "/getEntityByFilter", null, filter, filterPosition);
-        for (int i = 0; i < entityProperties.size(); i++) {
-            properties[i] = entityProperties.get(i);
-        }
-        System.out.println(properties[0]);
-
-        return properties;
-    }
-
+        id + "\n" + precioMetroCuadrado + "\n" + nombreEdificio + "\n"
+                + metrosCuadrados + "\n" + costoFinal + "\n" + precio + "\n"
+                + valorCuotaMensual + "\n" + ubicacion.getNombreBarrio()
+                + "\n" + ubicacionEnEdificio + "\n" + propietario.getId() + "\n"
+                + ciudad.getId() + "\n" + numeroCuartos + "\n"
+                + constructora.getId() + "\n" + ubicacion.getId();
          */
-        int[][] xd = {
-            {1, 4,3, 4},
-            {2, 3,3 , 4},
-            {3, 5, 6,5}};
+        Departamento c = (Departamento) deserializer.deserialize("departamentos", "1");
+        System.out.println(c.getId());
+        System.out.println(c.getNombreEdificio());
+        System.out.println(c.getMetrosCuadrados());
+        System.out.println(c.getCostoFinal());
+        System.out.println(c.getPrecio());
+        System.out.println(c.getValorCuotaMensual());
+        System.out.println(c.getUbicacion().getNombreBarrio());
+        System.out.println(c.getUbicacionEnEdificio());
+        
+        
+        
+        System.out.println(c.getPropietario().getId());
+        System.out.println(c.getCiudad().getId());
+        System.out.println(c.getNumeroCuartos());
+        System.out.println(c.getConstructora().getId());
+        System.out.println(c.getUbicacion().getId());
 
-        for (int i = 0; i < xd.length; i++) {
-            for (int j = 0; j < xd[i].length; j++) {
-                System.out.println(xd[j][i]);
-            }
-            System.out.println("");
-          }
     }
-
 }

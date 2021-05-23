@@ -1,11 +1,13 @@
 package paquetetres;
 
+import java.io.Serializable;
+
 
 /**
  *
  * @author bitxanax
  */
-public class Ubicacion {
+public class Ubicacion implements Serializable{
 
     private String id;
     private String nombreBarrio;

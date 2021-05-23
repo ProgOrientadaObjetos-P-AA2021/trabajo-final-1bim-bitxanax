@@ -5,6 +5,7 @@
  */
 package paqueteseis;
 
+import java.io.Serializable;
 import paquetecinco.Constructora;
 import paquetecuatro.Ciudad;
 import paquetedos.Propietario;
@@ -14,7 +15,7 @@ import paquetetres.Ubicacion;
  *
  * @author bitxanax
  */
-public class Departamento  {
+public class Departamento implements Serializable {
 
     private String id;
     private String nombreEdificio;

@@ -5,11 +5,13 @@
  */
 package paquetecinco;
 
+import java.io.Serializable;
+
 /**
  *
  * @author bitxanax
  */
-public class Constructora {
+public class Constructora implements Serializable{
 
     private String id;
     private String nombre;

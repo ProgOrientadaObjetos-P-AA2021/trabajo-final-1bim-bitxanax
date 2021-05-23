@@ -5,11 +5,8 @@
  */
 package paqueteuno;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -26,7 +23,7 @@ public class Ejecutor {
     }
 
     public static void showMenu() throws InterruptedException, IOException {
-        
+
         DataHandler objectsManager = new DataHandler();
 
         Scanner read = new Scanner(System.in);
@@ -34,21 +31,21 @@ public class Ejecutor {
         boolean exit = false;
 
         while (exit == false) {
-            showFileMenu("utils/menu_text.txt");
+            showFileMenu("/menu_text.txt");
             System.out.print("\n► Opción: ");
             option = read.nextLine();
             option.replaceAll(" ", "");
 
             switch (option) {
                 case "1":
-                    showFileMenu("utils/entity_menu.txt");
+                    showFileMenu("/entity_menu.txt");
                     System.out.print("\n► Opción: ");
                     option = read.nextLine();
                     objectsManager.showEntityByOption(option);
 
                     break;
                 case "2":
-                    showFileMenu("utils/entityMenuInsertion.txt");
+                    showFileMenu("/entityMenuInsertion.txt");
                     System.out.print("\n► Opción: ");
                     option = read.nextLine();
                     objectsManager.saveEntityByOption(option);
@@ -56,11 +53,11 @@ public class Ejecutor {
                     break;
 
                 case "3":
-                    showFileMenu("utils/info.txt");
+                    showFileMenu("/info.txt");
                     break;
 
                 case "4":
-                    showFileMenu("utils/bye.txt");
+                    showFileMenu("/bye.txt");
                     exit = true;
                     break;
 
@@ -79,7 +76,7 @@ public class Ejecutor {
 
     public static void showFileMenu(String fileName) {
         try {
-            FilesHandler.showFileData(fileName, null, new String[0], "", 0);
+            FilesHandler.showFileData("/utils/" + fileName, null);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

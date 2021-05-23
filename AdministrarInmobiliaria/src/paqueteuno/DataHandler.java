@@ -6,6 +6,8 @@
 package paqueteuno;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import paquetecinco.Constructora;
 import paquetecuatro.Ciudad;
@@ -13,7 +15,7 @@ import paquetedos.Propietario;
 import paqueteseis.Casa;
 import paqueteseis.Departamento;
 import paquetetres.Ubicacion;
-import static paqueteuno.AlignFormat.alignFormats;
+import static paqueteuno.FilesInfo.alignFormats;
 
 /**
  *
@@ -21,76 +23,219 @@ import static paqueteuno.AlignFormat.alignFormats;
  */
 public class DataHandler {
 
+    static ArrayList<Propietario> propietarios = new ArrayList<>();
+    static ArrayList<Ubicacion> ubicaciones = new ArrayList<>();
+    static ArrayList<Casa> casas = new ArrayList<>();
+    static ArrayList<Departamento> departamentos = new ArrayList<>();
+    static ArrayList<Constructora> constructoras = new ArrayList<>();
+    static ArrayList<Ciudad> ciudades = new ArrayList<>();
     static FilesHandler dataController = new FilesHandler();
+    static Serializer serializer = new Serializer();
+    static Deserializer deserializer = new Deserializer();
     static Scanner read = new Scanner(System.in);
-    static String[] entities = new String[]{"propietarios", "ubicaciones", "ciudades",
-        "constructoras", "casas", "departamentos"};
-
+    static Animation animation = new Animation();
+    
     public void saveEntityByOption(String option) throws IOException {
         switch (option) {
             case "1":
                 Propietario propietario = createPropietario();
+                saveEntity("propietarios", propietario);
                 break;
+
             case "2":
                 Ubicacion ubicacion = createUbicacion();
+                saveEntity("ubicaciones", ubicacion);
                 break;
+
             case "3":
                 Ciudad ciudad = createCiudad();
+                saveEntity("ciudades", ciudad);
                 break;
 
             case "4":
                 Constructora constructora = createConstructora();
+                saveEntity("constructoras", constructora);
                 break;
 
             case "5":
                 Casa casa = createCasa();
+                saveEntity("casas", casa);
                 break;
 
             case "6":
                 Departamento departamento = createDepartamento();
+                saveEntity("departamentos", departamento);
                 break;
         }
     }
 
     public void showEntityByOption(String option) throws IOException {
-
+        animation.loadingBar();
         switch (option) {
             case "1":
-                showTable("utils/tables/propietariosTable.txt", null, null);
-                showTable("propietarios.txt", alignFormats.get(0), "/getEntities");
+                showPropietarios();
                 break;
             case "2":
-                showTable("utils/tables/ubicacionesTable.txt", null, null);
-                showTable("ubicaciones.txt", alignFormats.get(1), "/getEntities");
+                showUbicaciones();
                 break;
             case "3":
-                showTable("utils/tables/ciudadesTable.txt", null, null);
-                showTable("ciudades.txt", alignFormats.get(2), "/getEntities");
+                showCiudades();
                 break;
-
             case "4":
-                showTable("utils/tables/constructorasTable.txt", null, null);
-                showTable("constructoras.txt", alignFormats.get(3), "/getEntities");
-
+                showConstructoras();
                 break;
 
             case "5":
-                showTable("utils/tables/casasTable.txt", null, null);
-                showTable("casas.txt", alignFormats.get(4), "/getEntities");
-
+                showCasas();
                 break;
 
             case "6":
-                showTable("utils/tables/departamentosTable.txt", null, null);
-                showTable("casas.txt", alignFormats.get(5), "/getEntities");
+                showDepartamentos();
                 break;
             case "7":
-                showAllTables();
+                showAll();
                 break;
             default:
                 Ejecutor.showWrongOptionMessage();
                 return;
         }
+    }
+
+    public void showAll() throws IOException {
+        showPropietarios();
+        showUbicaciones();
+        showCiudades();
+        showConstructoras();
+        showCasas();
+        showDepartamentos();
+    }
+
+    public void showPropietarios() throws IOException {
+        String[] format;
+        showTable("/propietariosTable.txt", null);
+        format = alignFormats.get(0);
+        loadPropietarios();
+
+        for (int i = 0; i < propietarios.size(); i++) {
+            Propietario propietario = propietarios.get(i);
+            ArrayList<Object> properties = new ArrayList<>(List.of(propietario.getId(),
+                    propietario.getNombres(), propietario.getApellidos()));
+            for (int j = 0; j < format.length; j++) {
+                System.out.printf(format[j], properties.get(j));
+            }
+            System.out.println("");
+
+        }
+        propietarios = new ArrayList<>();
+    }
+
+    public void showUbicaciones() throws IOException {
+        String[] format;
+        showTable("/ubicacionesTable.txt", null);
+        format = alignFormats.get(1);
+        loadUbicaciones();
+
+        for (int i = 0; i < ubicaciones.size(); i++) {
+            Ubicacion ubicacion = ubicaciones.get(i);
+            ArrayList<Object> properties = new ArrayList<>(List.of(ubicacion.getId(),
+                    ubicacion.getNombreBarrio(), ubicacion.getReferencia(),
+                    ubicacion.getNumeroCasa()));
+            for (int j = 0; j < format.length; j++) {
+                System.out.printf(format[j], properties.get(j));
+            }
+            System.out.println("");
+        }
+
+        ubicaciones = new ArrayList<>();
+    }
+
+    public void showDepartamentos() throws IOException {
+        String[] format;
+        showTable("/departamentosTable.txt", null);
+        format = alignFormats.get(5);
+        loadDepartamentos();
+
+        for (int i = 0; i < departamentos.size(); i++) {
+            Departamento departamento = departamentos.get(i);
+            ArrayList<Object> properties = new ArrayList<>(List.of(
+                    departamento.getId(), departamento.getPrecioMetroCuadrado(),
+                    departamento.getNombreEdificio(), departamento.getMetrosCuadrados(),
+                    departamento.getCostoFinal(), departamento.getPrecio(),
+                    departamento.getValorCuotaMensual(),
+                    departamento.getUbicacion().getNombreBarrio(),
+                    departamento.getUbicacionEnEdificio(),
+                    departamento.getPropietario().getId(),
+                    departamento.getCiudad().getId(), departamento.getNumeroCuartos(),
+                    departamento.getConstructora().getId(),
+                    departamento.getUbicacion().getId()));
+            for (int j = 0; j < format.length; j++) {
+                System.out.printf(format[j], properties.get(j));
+            }
+            System.out.println("");
+        }
+        departamentos = new ArrayList<>();
+    }
+
+    public void showCiudades() throws IOException {
+        String[] format;
+        showTable("/ciudadesTable.txt", null);
+        format = alignFormats.get(2);
+        loadCiudades();
+
+        for (int i = 0; i < ciudades.size(); i++) {
+            Ciudad ciudad = ciudades.get(i);
+            ArrayList<Object> properties = new ArrayList<>(List.of(
+                    ciudad.getNombreCiudad(), ciudad.getNombreProvincia(),
+                    ciudad.getId()));
+            for (int j = 0; j < format.length; j++) {
+                System.out.printf(format[j], properties.get(j));
+            }
+            System.out.println("");
+        }
+        ciudades = new ArrayList<>();
+    }
+
+    public void showConstructoras() throws IOException {
+        String[] format;
+        showTable("/constructorasTable.txt", null);
+        format = alignFormats.get(3);
+        loadConstructoras();
+
+        for (int i = 0; i < constructoras.size(); i++) {
+            Constructora constructora = constructoras.get(i);
+            ArrayList<Object> properties = new ArrayList<>(List.of(constructora.getId(),
+                    constructora.getNombre()));
+            for (int j = 0; j < format.length; j++) {
+                System.out.printf(format[j], properties.get(j));
+            }
+            System.out.println("");
+        }
+
+        constructoras = new ArrayList<>();
+    }
+
+    public void showCasas() throws IOException {
+        String[] format;
+        showTable("/casasTable.txt", null);
+        format = alignFormats.get(4);
+        loadCasas();
+        for (int i = 0; i < casas.size(); i++) {
+            Casa casa = casas.get(i);
+
+            ArrayList<Object> properties = new ArrayList<>(List.of(casa.getId(),
+                    casa.getMetrosCuadrados(), casa.getCostoFinal(), casa.getNumeroCuartos(),
+                    casa.getPrecioMetroCuadrado(), casa.getPropietario().getId(),
+                    casa.getUbicacion().getNumeroCasa(), casa.getCiudad().getNombreCiudad(),
+                    casa.getConstructora().getId()));
+
+            for (int j = 0; j < format.length; j++) {
+                System.out.printf(format[j], properties.get(j));
+            }
+            System.out.println("");
+        }
+
+        casas = new ArrayList<>();
+
     }
 
     public Propietario createPropietario() throws IOException {
@@ -101,11 +246,9 @@ public class DataHandler {
         System.out.print(" ■ Apellidos -> ");
         String apellidos = read.nextLine();
 
-        String id = dataController.getLastID("utils/lastPropietarioID.txt");
+        String id = FilesHandler.getLastId("propietarios", true);
 
         Propietario propietario = new Propietario(id, nombres, apellidos);
-
-        saveEntity("propietarios.txt", propietario);
 
         return propietario;
     }
@@ -120,10 +263,10 @@ public class DataHandler {
         System.out.print(" ■ Número de casa: ");
         int numCasa = Integer.parseInt(read.nextLine());
 
-        String id = dataController.getLastID("utils/lastUbicacionID.txt");
+        String id = FilesHandler.getLastId("ubicaciones", true);
 
         Ubicacion ubicacion = new Ubicacion(numCasa, barrio, referencia, id);
-        saveEntity("ubicaciones.txt", ubicacion);
+        saveEntity("ubicaciones", ubicacion);
 
         return ubicacion;
     }
@@ -132,12 +275,11 @@ public class DataHandler {
         System.out.println("Información de la constructora: ");
 
         System.out.print(" ■ Nombre -> ");
-        String nombreEmpresa = read.next();
+        String nombreEmpresa = read.nextLine();
 
-        String id = dataController.getLastID("utils/lastConstructoraID.txt");
+        String id = FilesHandler.getLastId("constructoras", true);
 
         Constructora constructora = new Constructora(id, nombreEmpresa);
-        saveEntity("constructoras.txt", constructora);
         return constructora;
     }
 
@@ -157,7 +299,7 @@ public class DataHandler {
         String propietarioID = read.nextLine();
 
         System.out.print(" ■ Número de Casa-> ");
-        String numCasa = read.nextLine();
+        int numCasa = Integer.parseInt(read.nextLine());
 
         System.out.print(" ■ Nombre ciudad-> ");
         String nombreCiudad = read.nextLine();
@@ -165,7 +307,7 @@ public class DataHandler {
         System.out.print(" ■ ID de la constructora-> ");
         String constructoraID = read.nextLine();
 
-        String id = dataController.getLastID("utils/lastCasaID.txt");
+        String id = FilesHandler.getLastId("casas", true);
 
         Casa casa = new Casa(id, precioMetroCuadrado, metrosCuadrados, numeroCuartos,
                 getPropietarioByID(propietarioID),
@@ -173,7 +315,6 @@ public class DataHandler {
                 getCiudadByNombre(nombreCiudad), getConstructoraByID(constructoraID));
         casa.calcularCostoFinal();
 
-        saveEntity("casas.txt", casa);
         return casa;
 
     }
@@ -206,7 +347,7 @@ public class DataHandler {
         String propietarioID = read.nextLine();
 
         System.out.print(" ■ Número de Casa-> ");
-        String numCasa = read.nextLine();
+        int numCasa = Integer.parseInt(read.nextLine());
 
         System.out.print(" ■ Nombre ciudad-> ");
         String nombreCiudad = read.nextLine();
@@ -214,7 +355,7 @@ public class DataHandler {
         System.out.print(" ■ ID de la constructora-> ");
         String constructoraID = read.nextLine();
 
-        String id = dataController.getLastID("utils/lastDepartamentoID.txt");
+        String id = FilesHandler.getLastId("departamentos", true);
 
         Departamento departamento = new Departamento(id,
                 getPropietarioByID(propietarioID),
@@ -224,8 +365,6 @@ public class DataHandler {
                 numeroCuartos, getConstructoraByID(constructoraID));
 
         departamento.calcularCostoFinal();
-
-        saveEntity("departamentos.txt", departamento);
 
         return departamento;
     }
@@ -238,58 +377,165 @@ public class DataHandler {
         System.out.print(" ■ Nombre provincia -> ");
         String nombreProvincia = read.nextLine();
 
-        String id = dataController.getLastID("utils/lastCiudadID.txt");
+        String id = FilesHandler.getLastId("ciudades", true);
 
         Ciudad ciudad = new Ciudad(nombreCiudad, nombreProvincia, id);
 
-        saveEntity("ciudades.txt", ciudad);
         return ciudad;
     }
 
     public Propietario getPropietarioByID(String id) throws IOException {
-        String[] properties = new String[3];
-        properties = dataController.getByFilter(properties, "propietarios.txt", id, 0);
-        return new Propietario(properties[0], properties[1], properties[2]);
+        loadPropietarios();
+        Propietario propietario = null;
+
+        for (Propietario p : propietarios) {
+            if (p.getId().equals(id)) {
+                propietario = p;
+            }
+        }
+        return propietario;
     }
 
-    public Ubicacion getUbicacionByNumCasa(String numCasa) throws IOException {
-        String[] properties = new String[4];
-        properties = dataController.getByFilter(properties, "ubicaciones.txt", numCasa, 0);
-        return new Ubicacion(Integer.parseInt(properties[0]), properties[1], properties[2],
-                properties[3]);
+    public Ubicacion getUbicacionByNumCasa(int numCasa) throws IOException {
+        loadUbicaciones();
+        Ubicacion ubicacion = null;
 
+        for (Ubicacion ub : ubicaciones) {
+            if (ub.getNumeroCasa() == numCasa) {
+                ubicacion = ub;
+            }
+        }
+
+        return ubicacion;
     }
 
     public Ciudad getCiudadByNombre(String nombre) throws IOException {
-        String[] properties = new String[3];
-        properties = dataController.getByFilter(properties, "ciudades.txt", nombre, 0);
-        return new Ciudad(properties[0], properties[1], properties[2]);
+        loadCiudades();
+        Ciudad ciudad = null;
+        for (Ciudad c : ciudades) {
+            if (c.getNombreCiudad().equals(nombre)) {
+                ciudad = c;
+            }
+        }
+        return ciudad;
     }
 
     public Constructora getConstructoraByID(String id) throws IOException {
-        String[] properties = new String[2];
-        properties = dataController.getByFilter(properties, "constructoras.txt", id, 0);
-        return new Constructora(properties[0], properties[1]);
+        loadConstructoras();
+        Constructora constructora = null;
+        for (Constructora con : constructoras) {
+            if (con.getId().equals(id)) {
+                System.out.println("found");
+                constructora = con;
+            }
+        }
+        return constructora;
     }
 
-    public void showTable(String fileName, String[] alignFormat, String command) throws IOException {
-        FilesHandler.showFileData(fileName, command, alignFormat, null, 0);
-    }
+    public void loadConstructoras() throws IOException {
+        Constructora constructora = null;
+        int cantidadConstructoras = Integer.parseInt(FilesHandler.getLastId("constructoras", false));
 
-    public void showAllTables() throws IOException {
-        Animations animation = new Animations();
-        animation.loadingBar();
-        for (int i = 0; i < entities.length; i++) {
-            showTable("utils/tables/" + entities[i] + "Table.txt", null, null);
-            showTable(entities[i] + ".txt", alignFormats.get(i), "/getEntities");
-            System.out.print("=============================================");
-            System.out.print("=============================================");
+        int idIndex = 1;
+
+        for (int i = 0; i < cantidadConstructoras; i++) {
+            constructora = (Constructora) deserializer.deserialize("constructoras",
+                    Integer.toString((idIndex < cantidadConstructoras) ? idIndex++ : idIndex));
+            constructoras.add(constructora);
         }
 
     }
 
+    public void loadCiudades() throws IOException {
+        Ciudad ciudad = null;
+
+        int cantidadCiudades = Integer.parseInt(FilesHandler.getLastId("ciudades",
+                false));
+        int idIndex = 1;
+        for (int i = 0; i < cantidadCiudades; i++) {
+            ciudad = (Ciudad) deserializer.deserialize("ciudades",
+                    Integer.toString((idIndex < cantidadCiudades) ? idIndex++ : idIndex));
+            ciudades.add(ciudad);
+        }
+    }
+
+    public void loadUbicaciones() throws IOException {
+        Ubicacion ubicacion = null;
+        int cantidadUbicaciones = Integer.parseInt(FilesHandler.getLastId("ubicaciones",
+                false));
+
+        int idIndex = 1;
+
+        for (int i = 0; i < cantidadUbicaciones; i++) {
+            ubicacion = (Ubicacion) deserializer.deserialize("ubicaciones",
+                    Integer.toString((idIndex < cantidadUbicaciones) ? idIndex++ : idIndex));
+            ubicaciones.add(ubicacion);
+        }
+    }
+
+    public void loadPropietarios() throws IOException {
+        Propietario propietario = null;
+        int cantidadPropietarios = Integer.parseInt(FilesHandler.getLastId("propietarios",
+                false));
+
+        int idIndex = 1;
+
+        for (int i = 0; i < cantidadPropietarios; i++) {
+
+            propietario = (Propietario) deserializer.deserialize("propietarios",
+                    Integer.toString((idIndex < cantidadPropietarios) ? idIndex++ : idIndex));
+            propietarios.add(propietario);
+        }
+    }
+
+    public void loadDepartamentos() throws IOException {
+        Departamento departamento = null;
+        int cantidadDepartamentos = Integer.parseInt(FilesHandler.getLastId("departamentos",
+                false));
+
+        int idIndex = 1;
+
+        for (int i = 0; i < cantidadDepartamentos; i++) {
+            departamento = (Departamento) deserializer.deserialize("departamentos",
+                    Integer.toString((idIndex < cantidadDepartamentos) ? idIndex++ : idIndex));
+            departamentos.add(departamento);
+        }
+
+    }
+
+    public void loadCasas() throws IOException {
+        Casa casa = null;
+        int cantidadCasas = Integer.parseInt(FilesHandler.getLastId("casas", false));
+
+        int idIndex = 1;
+
+        for (int i = 0; i < cantidadCasas; i++) {
+            casa = (Casa) deserializer.deserialize("casas",
+                    Integer.toString((idIndex < cantidadCasas) ? idIndex++ : idIndex));
+
+            casas.add(casa);
+        }
+    }
+
+    public void showTable(String fileName, String[] alignFormat) throws IOException {
+        FilesHandler.showFileData("/utils/tables" + fileName, alignFormat);
+    }
+
+    public void showAllTables() throws IOException {
+        String[] entities = new String[]{"propietarios", "ubicaciones", "ciudades",
+            "constructoras", "casas", "departamentos"};
+        Animation animation = new Animation();
+        animation.loadingBar();
+        for (int i = 0; i < entities.length; i++) {
+            showTable("utils/tables/" + entities[i] + "Table.txt", null);
+            showTable(entities[i] + ".txt", alignFormats.get(i));
+            System.out.print("=============================================");
+            System.out.print("=============================================");
+        }
+    }
+
     public static <E> void saveEntity(String filename, E entity) throws IOException {
-        dataController.saveInFile(filename, entity.toString(), "append");
+        serializer.serialize(filename, entity);
     }
 
 }

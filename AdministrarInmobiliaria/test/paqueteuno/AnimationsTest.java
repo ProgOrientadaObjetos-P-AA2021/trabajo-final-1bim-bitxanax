@@ -21,9 +21,9 @@ public class AnimationsTest {
             "%12s", "%15s", "%16s", "%15s", "%14s"};
         String[] ciudadesAlignFormat = new String[]{"%16s", "%23s", "%12s"};
         
-        Animations animation = new Animations();
-        animation.showTable("utils/tables/casasTable.txt", null, null);
-        animation.showTable("casas.txt", casasAlignFormat, "/getEntities");
+        Animation animation = new Animation();
+        //animation.showTable("utils/tables/casasTable.txt", null, null);
+        //animation.showTable("casas.txt", casasAlignFormat, "/getEntities");
         
         /*
             public String[] getByFilter(String[] properties, String fileName, String filter,

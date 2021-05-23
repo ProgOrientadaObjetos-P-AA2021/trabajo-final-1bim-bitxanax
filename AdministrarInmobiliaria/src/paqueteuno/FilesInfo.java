@@ -6,16 +6,18 @@
 package paqueteuno;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Hashtable;
 import java.util.List;
-
 /**
  *
  * @author bitxanax
+ * 
+ * 
+ * 
  */
-public class AlignFormat {
+public class FilesInfo {
 
-    static String[] propietariosAlignFormat = new String[]{"%10s", "%35s", "%38s"},
+    final static String[] propietariosAlignFormat = new String[]{"%10s", "%35s", "%38s"},
             ubicacionesAlignFormat = new String[]{"%7s", "%34s", "%43s", "%8s"},
             ciudadesAlignFormat = new String[]{"%16s", "%23s", "%12s"},
             constructorasAlignFormat = new String[]{"%9s", "%30s"},
@@ -27,5 +29,8 @@ public class AlignFormat {
     final static ArrayList<String[]> alignFormats = new ArrayList(List.of(propietariosAlignFormat,
             ubicacionesAlignFormat, ciudadesAlignFormat, constructorasAlignFormat, casasAlignFormat,
             departamentosAlignFormat));
+
+    static Hashtable<Object, String> entityFoldersNames;
+
 
 }

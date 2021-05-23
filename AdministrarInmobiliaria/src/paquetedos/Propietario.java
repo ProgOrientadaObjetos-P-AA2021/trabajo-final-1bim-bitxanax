@@ -12,7 +12,7 @@ import java.io.Serializable;
  *
  * @author bitxanax
  */
-public class Propietario {
+public class Propietario implements Serializable{
 
     String id;
     String nombres;

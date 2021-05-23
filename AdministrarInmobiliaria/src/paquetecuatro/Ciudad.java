@@ -5,13 +5,15 @@
  */
 package paquetecuatro;
 
+import java.io.Serializable;
+
 /**
  *
  * @author bitxanax
  */
-public class Ciudad {
+public class Ciudad implements Serializable{
 
-    private String id;
+    private String  id;
     private String nombreCiudad;
     private String nombreProvincia;
 
