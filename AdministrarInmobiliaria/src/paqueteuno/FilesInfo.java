@@ -6,7 +6,6 @@
 package paqueteuno;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.List;
 /**
  *
@@ -29,8 +28,5 @@ public class FilesInfo {
     final static ArrayList<String[]> alignFormats = new ArrayList(List.of(propietariosAlignFormat,
             ubicacionesAlignFormat, ciudadesAlignFormat, constructorasAlignFormat, casasAlignFormat,
             departamentosAlignFormat));
-
-    static Hashtable<Object, String> entityFoldersNames;
-
 
 }

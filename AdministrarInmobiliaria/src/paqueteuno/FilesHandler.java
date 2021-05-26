@@ -92,7 +92,6 @@ public class FilesHandler {
 
         }
     }
-    ///datos/propietarios0/last_propietarios0ID.txt
 
     public static String getLastId(String fileName, boolean needsToBeModified) {
         FileReader fileReader = null;

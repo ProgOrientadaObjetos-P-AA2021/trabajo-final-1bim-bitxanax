@@ -521,19 +521,6 @@ public class DataHandler {
         FilesHandler.showFileData("/utils/tables" + fileName, alignFormat);
     }
 
-    public void showAllTables() throws IOException {
-        String[] entities = new String[]{"propietarios", "ubicaciones", "ciudades",
-            "constructoras", "casas", "departamentos"};
-        Animation animation = new Animation();
-        animation.loadingBar();
-        for (int i = 0; i < entities.length; i++) {
-            showTable("utils/tables/" + entities[i] + "Table.txt", null);
-            showTable(entities[i] + ".txt", alignFormats.get(i));
-            System.out.print("=============================================");
-            System.out.print("=============================================");
-        }
-    }
-
     public static <E> void saveEntity(String filename, E entity) throws IOException {
         serializer.serialize(filename, entity);
     }

@@ -5,9 +5,7 @@
  */
 package paqueteuno;
 
-import java.io.BufferedReader;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import static paqueteuno.FilesHandler.lastId;
