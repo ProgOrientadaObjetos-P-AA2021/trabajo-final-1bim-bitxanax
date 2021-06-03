@@ -435,7 +435,7 @@ public class DataHandler {
     public void loadConstructoras() throws IOException {
         Constructora constructora = null;
         int cantidadConstructoras = Integer.parseInt(FilesHandler.getLastId("constructoras", false));
-
+        
         int idIndex = 1;
 
         for (int i = 0; i < cantidadConstructoras; i++) {
